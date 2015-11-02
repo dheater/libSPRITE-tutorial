@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[])
 {
-    argc; // Supress unused variable warning.
+    (void) argc; // Supress unused variable warning.
 
     SCALE::Scale_if& scale = SCALE::Scale_if::get_instance();
 
