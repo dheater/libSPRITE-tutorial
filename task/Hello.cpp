@@ -15,8 +15,9 @@ namespace task {
 
     bool Hello::execute()
     {
+        static unsigned int i = 0;
         IPRINTF("Hello World\n");
-        return true;
+        return (++i < 5);
     }
 
     void Hello::terminate()
