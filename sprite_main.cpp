@@ -1,55 +1,25 @@
-#include <SRTX/Scheduler.h>
+#include <SCALE/Scale_if.h>
 #include <base/XPRINTF.h>
-#include <signal.h>
 
-#include "task/Hello.hpp"
+#include "task/Hello_lua.hpp"
 
-static volatile bool done(false);
-
-static void kill_me_now(int)
+int main(int argc, char* argv[])
 {
-    done = true;
-}
+    argc; // Supress unused variable warning.
 
-static units::Nanoseconds HZ_to_period(unsigned int hz)
-{
-    return units::Nanoseconds(1*units::SEC / hz);
-}
+    SCALE::Scale_if& scale = SCALE::Scale_if::get_instance();
 
-int main(void)
-{
-    /* Set up the signal handler for control-C.
+    /* Register my tasks with with the Lua executive.
      */
-    signal(SIGINT, kill_me_now);
+    task::Hello_lua::register_class(scale.state());
 
-    /* Declare the task properties.
+    /* Execute the main script that drives the simulation.
      */
-    SRTX::Task_properties tp;
-    SRTX::priority_t priority = SRTX::MAX_PRIO;
-
-    /* Create the scheduler
-     */
-    tp.prio = priority;
-    tp.period = HZ_to_period(1);
-    SRTX::Scheduler &s = SRTX::Scheduler::get_instance();
-    s.set_properties(tp);
-
-    /* Create the "Hello World!" task
-     */
-    --tp.prio;
-    task::Hello hello("Hello");
-    hello.set_properties(tp);
-
-    s.start();
-    hello.start();
-
-    while(!done)
+    if(false == scale.run_script(argv[1]))
     {
-        ;
+        EPRINTF("Failed executing script: %s\n", argv[1]);
+        return -1;
     }
-
-    hello.stop();
-    s.stop();
 
     return 0;
 }
