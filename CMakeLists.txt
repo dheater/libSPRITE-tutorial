@@ -18,4 +18,4 @@ add_executable(sprite_main sprite_main.cpp
                task/Hello.cpp)
 
 # Specify libraries to link.
-target_link_libraries(sprite_main SPRITE_SRTX pthread)
+target_link_libraries(sprite_main SPRITE_SRTX rt pthread)
