@@ -1,5 +1,5 @@
-#ifndef __task_Hello_hpp__
-#define __task_Hello_hpp__
+#ifndef task_Hello_hpp
+#define task_Hello_hpp
 
 #include "SRTX/Task.h"
 
@@ -35,4 +35,4 @@ namespace task {
 
 } // namespace
 
-#endif // __task_Hello_hpp__
+#endif // task_Hello_hpp
