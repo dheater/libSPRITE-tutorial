@@ -26,7 +26,19 @@ namespace task {
          */
         static Hello *allocator(lua_State *L)
         {
-            return new Hello(luaL_checkstring(L, 1));
+            return new Hello(luaL_checkstring(L, 1), luaL_checknumber(L, 2));
+        }
+
+        /**
+         * Set the number of times the task should run.
+         * @param L Pointer to the Lua state.
+         * @return Number of elements being passed back through the Lua stack.
+         */
+        static int set_ntimes(lua_State *L)
+        {
+            Hello *p = luaW_check<Hello>(L, 1);
+            p->set_ntimes(luaL_checknumber(L, 2));
+            return 0;
         }
 
         /**
@@ -46,7 +58,8 @@ namespace task {
 
     const char Hello_lua::class_name[] = "Hello";
 
-    luaL_Reg Hello_lua::methods[] = { { NULL, NULL } };
+    luaL_Reg Hello_lua::methods[] = { { "set_ntimes", Hello_lua::set_ntimes },
+                                      { NULL, NULL } };
 
 } // namespace
 

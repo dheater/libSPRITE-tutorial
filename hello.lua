@@ -2,6 +2,12 @@ package.path = '/usr/local/lib/SPRITE/?.lua;' .. package.path
 local s = require 'scheduler'
 
 --------------------------------------------------------------------------------
+-- Set some script constants
+--------------------------------------------------------------------------------
+
+HELLO_NTIMES = 10
+
+--------------------------------------------------------------------------------
 -- Initialize the tasks.
 --------------------------------------------------------------------------------
 
@@ -15,7 +21,7 @@ scheduler = s.create(tp, SCHEDULER_PERIOD, priority)
 priority = priority - 1
 
 -- Create the hello world task.
-hello = Hello.new("Hello")
+hello = Hello.new("Hello", HELLO_NTIMES)
 s.set_task_properties(hello, tp, SCHEDULER_PERIOD, priority)
 priority = priority - 1
 

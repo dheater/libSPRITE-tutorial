@@ -10,8 +10,9 @@ namespace task {
         /**
          * Constructor.
          * @param name Task name.
+         * @param ntimes Number of times to run before exiting the task.
          */
-        Hello(const char *const name);
+        Hello(const char *const name, unsigned int ntimes);
 
         /**
          * Initialization routine.
@@ -31,6 +32,23 @@ namespace task {
          * Terminate routine.
          */
         void terminate();
+
+        /**
+         * Set the number of times the program executes.
+         * @param ntimes Number of times to execute.
+         */
+        void set_ntimes(unsigned int ntimes);
+
+      private:
+        /**
+         * Number of times to run.
+         */
+        unsigned int m_ntimes;
+
+        /**
+         * Number of times we have run.
+         */
+        unsigned int m_count;
     };
 
 } // namespace
