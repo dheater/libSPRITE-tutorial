@@ -23,10 +23,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 # Add the executable and it's source.
 add_executable(sprite_main sprite_main.cpp
-               task/Hello.cpp)
+               task/Hello.cpp
+               task/Ping.cpp
+               task/Pong.cpp
+               )
 
 # Specify libraries to link.
 target_link_libraries(sprite_main ${LIBS} pthread rt)
 
 # Copy Lua scripts to the build directory.
-file(COPY hello.lua DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY hello.lua ping_pong.lua DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

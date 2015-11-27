@@ -2,6 +2,8 @@
 #include <base/XPRINTF.h>
 
 #include "task/Hello_lua.hpp"
+#include "task/Ping_lua.hpp"
+#include "task/Pong_lua.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -12,6 +14,8 @@ int main(int argc, char* argv[])
     /* Register my tasks with with the Lua executive.
      */
     task::Hello_lua::register_class(scale.state());
+    task::Ping_lua::register_class(scale.state());
+    task::Pong_lua::register_class(scale.state());
 
     /* Execute the main script that drives the simulation.
      */
